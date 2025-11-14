@@ -1,9 +1,39 @@
-const inputs = document.querySelectorAll('.controls input');
+const video = document.getElementById('video');
+const toggleButton = document.getElementById('toggle');
+const rewindButton = document.getElementById('rewind');
+const forwardButton = document.getElementById('forward');
+const volumeControl = document.getElementById('volume');
+const playbackSpeedControl = document.getElementById('playbackSpeed');
+const progressFilled = document.querySelector('.progress__filled');
 
-    function handleUpdate() {
-      const suffix = this.dataset.sizing || '';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+toggleButton.addEventListener('click', () => {
+    if (video.paused) {
+        video.play();
+        toggleButton.textContent = '❚ ❚'; // Change to pause icon
+    } else {
+        video.pause();
+        toggleButton.textContent = '►'; // Change to play icon
     }
+});
 
-    inputs.forEach(input => input.addEventListener('change', handleUpdate));
-    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+rewindButton.addEventListener('click', () => {
+    video.currentTime -= 10;
+});
+
+forwardButton.addEventListener('click', () => {
+    video.currentTime += 25;
+});
+
+volumeControl.addEventListener('input', (e) => {
+    video.volume = e.target.value;
+});
+
+playbackSpeedControl.addEventListener('input', (e) => {
+    video.playbackRate = e.target.value;
+});
+
+// Update progress bar
+video.addEventListener('timeupdate', () => {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressFilled.style.width = `${percent}%`;
+});
