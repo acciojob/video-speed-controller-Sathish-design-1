@@ -1,2 +1,13 @@
 
 /* Your CSS Code here. */
+.progress {
+    background: #ddd;
+    height: 5px;
+    width: 100%;
+}
+
+.progress__filled {
+    background: #ff0000;
+    height: 100%;
+    width: 0%; /* Initial width */
+}

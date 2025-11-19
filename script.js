@@ -6,6 +6,10 @@ const volumeControl = document.getElementById('volume');
 const playbackSpeedControl = document.getElementById('playbackSpeed');
 const progressFilled = document.querySelector('.progress__filled');
 
+// Set initial volume and playback speed
+video.volume = volumeControl.value;
+video.playbackRate = playbackSpeedControl.value;
+
 toggleButton.addEventListener('click', () => {
     if (video.paused) {
         video.play();
@@ -17,11 +21,11 @@ toggleButton.addEventListener('click', () => {
 });
 
 rewindButton.addEventListener('click', () => {
-    video.currentTime -= 10;
+    video.currentTime = Math.max(0, video.currentTime - 10); // Prevent going backward
 });
 
 forwardButton.addEventListener('click', () => {
-    video.currentTime += 25;
+    video.currentTime = Math.min(video.duration, video.currentTime + 25); // Prevent going forward
 });
 
 volumeControl.addEventListener('input', (e) => {
