@@ -1,10 +1,10 @@
-const video = document.getElementById('video');
-const playButton = document.getElementById('playButton');
-const volumeControl = document.getElementById('volume');
-const playbackSpeedControl = document.getElementById('playbackSpeed');
-const rewindButton = document.getElementById('rewindButton');
-const forwardButton = document.getElementById('forwardButton');
-const progressFilled = document.querySelector('.progress__filled');
+const video = document.querySelector('.player__video');
+const playButton = document.querySelector('.player__button');
+const volumeSlider = document.querySelector('.player__slider[type="range"]');
+const playbackSpeedSlider = document.querySelector('.player__slider[type="range"]:nth-of-type(2)');
+const progressBar = document.querySelector('.progress__filled');
+const rewindButton = document.querySelector('.rewind');
+const forwardButton = document.querySelector('.forward');
 
 playButton.addEventListener('click', () => {
     if (video.paused) {
@@ -16,12 +16,17 @@ playButton.addEventListener('click', () => {
     }
 });
 
-volumeControl.addEventListener('input', (e) => {
+volumeSlider.addEventListener('input', (e) => {
     video.volume = e.target.value;
 });
 
-playbackSpeedControl.addEventListener('input', (e) => {
+playbackSpeedSlider.addEventListener('input', (e) => {
     video.playbackRate = e.target.value;
+});
+
+video.addEventListener('timeupdate', () => {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressBar.value = percent;
 });
 
 rewindButton.addEventListener('click', () => {
@@ -30,9 +35,4 @@ rewindButton.addEventListener('click', () => {
 
 forwardButton.addEventListener('click', () => {
     video.currentTime += 25;
-});
-
-video.addEventListener('timeupdate', () => {
-    const percent = (video.currentTime / video.duration) * 100;
-    progressFilled.style.width = `${percent}%`;
 });
