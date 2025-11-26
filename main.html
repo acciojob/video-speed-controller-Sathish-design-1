@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Speed Controller</title>
+    <title>Custom Video Player</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional for styling -->
 </head>
 <body>
-    <video id="video" src="https://www.w3schools.com/html/mov_bbb.mp4" width="600"></video>
-    <div>
-        <button id="toggle">►</button>
-        <button id="rewind">« 10s</button>
-        <button id="forward">25s »</button>
-        <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
-        <input type="number" id="playbackSpeed" value="1" step="0.1" min="0.5" max="2">
-    </div>
-    <div class="progress">
-        <div class="progress__filled" style="width: 0%;"></div>
+    <div class="video-player">
+        <video id="video" src="https://www.w3schools.com/html/mov_bbb.mp4" width="600"></video>
+        <div class="controls">
+            <button id="playButton">►</button>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+            <input type="number" id="playbackSpeed" value="1" step="0.1" min="0.1" max="3">
+            <button id="rewindButton">« 10s</button>
+            <button id="forwardButton">25s »</button>
+            <div class="progress">
+                <div class="progress__filled" style="width: 0%;"></div>
+            </div>
+        </div>
     </div>
     <script src="scripts.js"></script>
 </body>
